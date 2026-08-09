@@ -1,0 +1,24 @@
+{
+  "name": "prodigy-task-02-stopwatch",
+  "version": "1.0.0",
+  "description": "Extravagant Beige and Emerald Green Luxury Watch Stopwatch & Chronometer Web Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "stopwatch",
+    "horology",
+    "chronometer",
+    "express",
+    "web-audio",
+    "canvas-animation"
+  ],
+  "author": "Antigravity AI",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

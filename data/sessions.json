@@ -1,0 +1,191 @@
+[
+  {
+    "id": "sess-1786312865652-mrocs",
+    "title": "Verification Sprint Run",
+    "category": "Athletics",
+    "totalTimeMs": 35000,
+    "formattedTotal": "00:00:35.000",
+    "laps": [
+      {
+        "lapNumber": 1,
+        "lapTimeMs": 17000,
+        "formattedLapTime": "00:00:17.000",
+        "splitTimeMs": 17000,
+        "formattedSplitTime": "00:00:17.000"
+      },
+      {
+        "lapNumber": 2,
+        "lapTimeMs": 18000,
+        "formattedLapTime": "00:00:18.000",
+        "splitTimeMs": 35000,
+        "formattedSplitTime": "00:00:35.000"
+      }
+    ],
+    "fastestLapMs": 17000,
+    "slowestLapMs": 18000,
+    "avgLapMs": 17500,
+    "notes": "Automated verification test",
+    "createdAt": "2026-08-09T22:01:05.652Z"
+  },
+  {
+    "id": "sess-1786312574830-1t4cd",
+    "title": "Verification Sprint Run",
+    "category": "Athletics",
+    "totalTimeMs": 35000,
+    "formattedTotal": "00:00:35.000",
+    "laps": [
+      {
+        "lapNumber": 1,
+        "lapTimeMs": 17000,
+        "formattedLapTime": "00:00:17.000",
+        "splitTimeMs": 17000,
+        "formattedSplitTime": "00:00:17.000"
+      },
+      {
+        "lapNumber": 2,
+        "lapTimeMs": 18000,
+        "formattedLapTime": "00:00:18.000",
+        "splitTimeMs": 35000,
+        "formattedSplitTime": "00:00:35.000"
+      }
+    ],
+    "fastestLapMs": 17000,
+    "slowestLapMs": 18000,
+    "avgLapMs": 17500,
+    "notes": "Automated verification test",
+    "createdAt": "2026-08-09T21:56:14.830Z"
+  },
+  {
+    "id": "sess-1786312428282-xpomy",
+    "title": "Verification Sprint Run",
+    "category": "Athletics",
+    "totalTimeMs": 35000,
+    "formattedTotal": "00:00:35.000",
+    "laps": [
+      {
+        "lapNumber": 1,
+        "lapTimeMs": 17000,
+        "formattedLapTime": "00:00:17.000",
+        "splitTimeMs": 17000,
+        "formattedSplitTime": "00:00:17.000"
+      },
+      {
+        "lapNumber": 2,
+        "lapTimeMs": 18000,
+        "formattedLapTime": "00:00:18.000",
+        "splitTimeMs": 35000,
+        "formattedSplitTime": "00:00:35.000"
+      }
+    ],
+    "fastestLapMs": 17000,
+    "slowestLapMs": 18000,
+    "avgLapMs": 17500,
+    "notes": "Automated verification test",
+    "createdAt": "2026-08-09T21:53:48.282Z"
+  },
+  {
+    "id": "sess-1786312147166-3ynz8",
+    "title": "Verification Sprint Run",
+    "category": "Athletics",
+    "totalTimeMs": 35000,
+    "formattedTotal": "00:00:35.000",
+    "laps": [
+      {
+        "lapNumber": 1,
+        "lapTimeMs": 17000,
+        "formattedLapTime": "00:00:17.000",
+        "splitTimeMs": 17000,
+        "formattedSplitTime": "00:00:17.000"
+      },
+      {
+        "lapNumber": 2,
+        "lapTimeMs": 18000,
+        "formattedLapTime": "00:00:18.000",
+        "splitTimeMs": 35000,
+        "formattedSplitTime": "00:00:35.000"
+      }
+    ],
+    "fastestLapMs": 17000,
+    "slowestLapMs": 18000,
+    "avgLapMs": 17500,
+    "notes": "Automated verification test",
+    "createdAt": "2026-08-09T21:49:07.166Z"
+  },
+  {
+    "id": "sess-luxury-demo-1",
+    "title": "Grand Prix Monaco Qualifying",
+    "category": "Motorsport",
+    "totalTimeMs": 74320,
+    "formattedTotal": "00:01:14.320",
+    "laps": [
+      {
+        "lapNumber": 1,
+        "lapTimeMs": 25410,
+        "formattedLapTime": "00:00:25.410",
+        "splitTimeMs": 25410,
+        "formattedSplitTime": "00:00:25.410"
+      },
+      {
+        "lapNumber": 2,
+        "lapTimeMs": 23890,
+        "formattedLapTime": "00:00:23.890",
+        "splitTimeMs": 49300,
+        "formattedSplitTime": "00:00:49.300"
+      },
+      {
+        "lapNumber": 3,
+        "lapTimeMs": 25020,
+        "formattedLapTime": "00:00:25.020",
+        "splitTimeMs": 74320,
+        "formattedSplitTime": "00:01:14.320"
+      }
+    ],
+    "fastestLapMs": 23890,
+    "slowestLapMs": 25410,
+    "avgLapMs": 24773,
+    "notes": "Optimal tire temperature on sector 2.",
+    "createdAt": "2026-08-10T02:30:00.000Z"
+  },
+  {
+    "id": "sess-luxury-demo-2",
+    "title": "Swiss Precision Sprint 400m",
+    "category": "Athletics",
+    "totalTimeMs": 48150,
+    "formattedTotal": "00:00:48.150",
+    "laps": [
+      {
+        "lapNumber": 1,
+        "lapTimeMs": 12100,
+        "formattedLapTime": "00:00:12.100",
+        "splitTimeMs": 12100,
+        "formattedSplitTime": "00:00:12.100"
+      },
+      {
+        "lapNumber": 2,
+        "lapTimeMs": 11850,
+        "formattedLapTime": "00:00:11.850",
+        "splitTimeMs": 23950,
+        "formattedSplitTime": "00:00:23.950"
+      },
+      {
+        "lapNumber": 3,
+        "lapTimeMs": 11980,
+        "formattedLapTime": "00:00:11.980",
+        "splitTimeMs": 35930,
+        "formattedSplitTime": "00:00:35.930"
+      },
+      {
+        "lapNumber": 4,
+        "lapTimeMs": 12220,
+        "formattedLapTime": "00:00:12.220",
+        "splitTimeMs": 48150,
+        "formattedSplitTime": "00:00:48.150"
+      }
+    ],
+    "fastestLapMs": 11850,
+    "slowestLapMs": 12220,
+    "avgLapMs": 12037,
+    "notes": "Paced 100m splits smoothly.",
+    "createdAt": "2026-08-10T01:15:00.000Z"
+  }
+]

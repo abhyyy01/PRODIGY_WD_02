@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHEL Chrono-Master | Classy Brushed Brass Stopwatch</title>
+  <meta name="description" content="A classy vintage-modern brushed brass stopwatch web application with a warm beige aesthetic, white dotted watch dial, moving background clock, and Node.js backend.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Warm Beige Background & Moving Black Clock Canvas -->
+  <div class="luxury-background-container">
+    <div class="radial-cream-glow"></div>
+    <div class="radial-parchment-glow"></div>
+    <canvas id="bg-clock-canvas" class="bg-moving-clock-canvas"></canvas>
+    <div class="vig-overlay"></div>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- Top Navigation Header -->
+    <header class="chrono-header">
+      <div class="brand-container">
+        <div class="brand-emblem">
+          <i class="fa-solid fa-stopwatch"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">AETHEL</span>
+          <span class="brand-subtitle">BRUSHED BRASS CHRONOGRAPH</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="status-pill" id="server-status-pill">
+          <span class="status-dot"></span>
+          <span class="status-text">Backend Connected</span>
+        </div>
+
+        <button id="sound-toggle-btn" class="icon-control-btn" title="Toggle Audio (M)">
+          <i class="fa-solid fa-volume-high"></i>
+          <span class="btn-tooltip">Sound ON</span>
+        </button>
+
+        <button id="export-all-btn" class="secondary-pill-btn" title="Export All Sessions">
+          <i class="fa-solid fa-file-export"></i>
+          <span>Export CSV</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Horology Chronometer Hero Section -->
+    <main class="main-chronometer-section">
+      <!-- Mode Selector Tab Bar -->
+      <div class="mode-selector-container">
+        <button class="mode-tab active" data-mode="stopwatch">
+          <i class="fa-solid fa-stopwatch"></i> Precision Stopwatch
+        </button>
+        <button class="mode-tab" data-mode="countdown">
+          <i class="fa-solid fa-hourglass-half"></i> Chrono Countdown
+        </button>
+      </div>
+
+      <!-- Main Watch Assembly Card -->
+      <div class="watch-assembly-card">
+        <!-- Mechanical Top Crown Pusher Assembly -->
+        <div class="top-crown-assembly">
+          <div class="crown-ring"></div>
+          <div class="crown-stem"></div>
+          <div class="crown-head" id="crown-pusher-btn" title="Top Mechanical Winder / Pusher"></div>
+        </div>
+
+        <!-- Outer Brushed Brass Bezel -->
+        <div class="outer-brass-bezel">
+          <div class="inner-bezel-ring">
+            
+            <!-- White Dotted Watch Dial -->
+            <div class="analog-dial-container white-dotted-dial" id="analog-dial">
+              <div class="dotted-sheet-overlay"></div>
+              <div class="dial-ticks-container" id="dial-ticks"></div>
+              
+              <!-- Sub-Dial 1: 60 Minutes -->
+              <div class="sub-dial sub-dial-minutes">
+                <span class="sub-dial-label">MIN</span>
+                <div class="sub-dial-ticks"></div>
+                <div class="sub-dial-hand" id="min-sub-hand"></div>
+              </div>
+
+              <!-- Sub-Dial 2: 1/100s Milliseconds -->
+              <div class="sub-dial sub-dial-millis">
+                <span class="sub-dial-label">1/100s</span>
+                <div class="sub-dial-ticks"></div>
+                <div class="sub-dial-hand" id="ms-sub-hand"></div>
+              </div>
+
+              <!-- Dark Steel Analog Hands -->
+              <div class="analog-hand lap-hand" id="analog-lap-hand"></div>
+              <div class="analog-hand main-chrono-hand" id="analog-main-hand"></div>
+              <div class="center-cap"></div>
+
+              <!-- Brand Watermark -->
+              <div class="dial-watermark">
+                <span class="wm-title">AETHEL</span>
+                <span class="wm-detail">PRECISION CHRONO</span>
+              </div>
+            </div>
+
+            <!-- Digital Time Display -->
+            <div class="digital-display-container">
+              <div class="time-readout-main" id="digital-time-display">
+                <span class="digit-group" id="digits-hours">00</span><span class="time-colon">:</span><span class="digit-group" id="digits-minutes">00</span><span class="time-colon">:</span><span class="digit-group" id="digits-seconds">00</span><span class="time-dot">.</span><span class="digit-group millis" id="digits-millis">000</span>
+              </div>
+              <div class="current-lap-preview" id="current-lap-preview">
+                <span class="preview-label">CURRENT LAP <span id="current-lap-number">#1</span>:</span>
+                <span class="preview-time" id="current-lap-time">00:00.000</span>
+              </div>
+            </div>
+
+            <!-- Countdown Inputs (Hidden when in Stopwatch Mode) -->
+            <div class="countdown-inputs-container hidden" id="countdown-inputs">
+              <div class="timer-input-group">
+                <label>HRS</label>
+                <input type="number" id="input-hrs" min="0" max="99" value="0">
+              </div>
+              <span class="colon-sep">:</span>
+              <div class="timer-input-group">
+                <label>MIN</label>
+                <input type="number" id="input-min" min="0" max="59" value="05">
+              </div>
+              <span class="colon-sep">:</span>
+              <div class="timer-input-group">
+                <label>SEC</label>
+                <input type="number" id="input-sec" min="0" max="59" value="00">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Stopwatch Control Pushers -->
+        <div class="pushers-control-panel">
+          <button id="lap-btn" class="pusher-btn secondary-pusher" title="Record Lap (L)" disabled>
+            <i class="fa-solid fa-flag"></i>
+            <span>LAP / SPLIT</span>
+          </button>
+
+          <button id="start-btn" class="pusher-btn primary-pusher" title="Start / Pause (Space)">
+            <i class="fa-solid fa-play"></i>
+            <span id="start-btn-label">START</span>
+          </button>
+
+          <button id="reset-btn" class="pusher-btn danger-pusher" title="Reset Stopwatch (R)">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>RESET</span>
+          </button>
+
+          <button id="save-session-trigger-btn" class="pusher-btn brass-pusher" title="Save Session to Backend (S)" disabled>
+            <i class="fa-solid fa-bookmark"></i>
+            <span>SAVE</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Lap Telemetry & Real-Time Analytics -->
+    <section class="telemetry-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fa-solid fa-chart-line"></i> Lap Telemetry & Performance
+        </h2>
+        <span class="section-badge" id="recorded-laps-count">0 Laps Recorded</span>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card fastest-card">
+          <div class="metric-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="metric-details">
+            <span class="metric-label">Fastest Lap</span>
+            <span class="metric-value" id="metric-fastest">--:--.---</span>
+          </div>
+        </div>
+
+        <div class="metric-card avg-card">
+          <div class="metric-icon"><i class="fa-solid fa-gauge-high"></i></div>
+          <div class="metric-details">
+            <span class="metric-label">Average Lap</span>
+            <span class="metric-value" id="metric-avg">--:--.---</span>
+          </div>
+        </div>
+
+        <div class="metric-card slowest-card">
+          <div class="metric-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div class="metric-details">
+            <span class="metric-label">Slowest Lap</span>
+            <span class="metric-value" id="metric-slowest">--:--.---</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lap Delta Visualizer Graph -->
+      <div class="lap-chart-container" id="lap-chart-container">
+        <div class="chart-empty-state" id="chart-empty-state">
+          <i class="fa-solid fa-chart-simple"></i>
+          <p>Record lap times to render real-time lap performance delta chart.</p>
+        </div>
+        <div class="bars-wrapper hidden" id="bars-wrapper"></div>
+      </div>
+
+      <!-- Live Laps Data Table -->
+      <div class="table-card">
+        <div class="table-scroll-wrapper">
+          <table class="chrono-table" id="laps-table">
+            <thead>
+              <tr>
+                <th>Lap #</th>
+                <th>Lap Time</th>
+                <th>Split Time</th>
+                <th>Delta ($\Delta$)</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody id="laps-table-body">
+              <tr class="empty-row">
+                <td colspan="5">No lap times recorded. Click "START" then "LAP / SPLIT" during timing.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Saved Timing Sessions Dashboard (Backend Integration) -->
+    <section class="history-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fa-solid fa-vault"></i> Saved Chrono Sessions (Server Database)
+        </h2>
+        <div class="history-actions">
+          <button id="refresh-sessions-btn" class="icon-text-btn">
+            <i class="fa-solid fa-arrows-rotate"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Server Global Stats Summary -->
+      <div class="server-stats-bar" id="server-stats-bar">
+        <div class="stat-pill"><span class="lbl">Total Saved Runs:</span> <strong id="stat-total-sessions">0</strong></div>
+        <div class="stat-pill"><span class="lbl">Aggregate Recorded Time:</span> <strong id="stat-total-time">00:00:00</strong></div>
+        <div class="stat-pill"><span class="lbl">Total Laps Tracked:</span> <strong id="stat-total-laps">0</strong></div>
+        <div class="stat-pill"><span class="lbl">All-Time Fastest Lap:</span> <strong id="stat-fastest-lap">--:--.---</strong></div>
+      </div>
+
+      <!-- Sessions Cards Grid -->
+      <div class="sessions-grid" id="sessions-grid">
+        <div class="loading-spinner-container" id="sessions-loading">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          <p>Connecting to Horology Database...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="chrono-footer">
+      <div class="footer-content">
+        <p>© 2026 <strong>AETHEL CHRONO-MASTER</strong>. Classy Brushed Brass Stopwatch for Prodigy Infotech Task-02.</p>
+        <p class="shortcuts-guide">
+          <kbd>Space</kbd> Start/Pause &nbsp;|&nbsp; <kbd>L</kbd> Lap &nbsp;|&nbsp; <kbd>R</kbd> Reset &nbsp;|&nbsp; <kbd>S</kbd> Save &nbsp;|&nbsp; <kbd>M</kbd> Sound Toggle
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Save Session Modal -->
+  <div class="modal-overlay hidden" id="save-modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-bookmark"></i> Save Timing Session</h3>
+        <button class="close-modal-btn" id="close-save-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="save-session-form">
+          <div class="form-group">
+            <label for="session-title">Session Title</label>
+            <input type="text" id="session-title" placeholder="e.g. Vintage Sprint Sector 1" required>
+          </div>
+          <div class="form-group">
+            <label for="session-category">Category</label>
+            <select id="session-category">
+              <option value="Motorsport">🏎️ Motorsport / Racing</option>
+              <option value="Athletics">🏃 Athletics / Running</option>
+              <option value="Swimming">🏊 Swimming</option>
+              <option value="Fitness">🏋️ Fitness & HIIT</option>
+              <option value="Scientific">🔬 Scientific / Lab Timing</option>
+              <option value="General" selected>⏱️ General Chronograph</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="session-notes">Session Notes</label>
+            <textarea id="session-notes" rows="3" placeholder="Optional notes on setup or performance..."></textarea>
+          </div>
+          <div class="summary-preview">
+            <div><span>Total Time:</span> <strong id="modal-summary-time">00:00.000</strong></div>
+            <div><span>Total Laps:</span> <strong id="modal-summary-laps">0</strong></div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="secondary-btn" id="cancel-save-btn">Cancel</button>
+            <button type="submit" class="primary-brass-btn" id="submit-save-btn">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Save to Database
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Session Detail Modal -->
+  <div class="modal-overlay hidden" id="detail-modal-overlay">
+    <div class="modal-card large-modal">
+      <div class="modal-header">
+        <h3 id="detail-modal-title">Session Telemetry</h3>
+        <button class="close-modal-btn" id="close-detail-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="detail-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
