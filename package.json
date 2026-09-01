@@ -1,7 +1,7 @@
 {
-  "name": "prodigy-task-02-stopwatch",
+  "name": "stop-watch",
   "version": "1.0.0",
-  "description": "Extravagant Beige and Emerald Green Luxury Watch Stopwatch & Chronometer Web Application",
+  "description": "Classy Brushed Brass Stopwatch & Chronometer Web Application for Prodigy Infotech Task-02",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
